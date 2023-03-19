@@ -11,21 +11,21 @@ class Filesystem {
      * @param string $path Le chemin absolu ou relatif du dossier à créer
      * @return array Un tableau contenant un booléen et un message de confirmation ou d'erreur
      */
-    public static function CreateFolder(string $path = "./Folder"): array {
+    public static function createFolder(string $path = "./Folder"): array {
         $result = array();
 
         if (is_dir($path)) { // Vérifie si le dossier existe déjà
             $result[] = false;
-            $result[] = "Folder already exists";
+            $result[] = "Le dossier existe déjà.";
             return $result;
         } else {
             if (mkdir($path, 0777, true)) { // Crée le dossier avec l'arborescence si nécessaire
                 $result[] = true;
-                $result[] = "Folder created successfully";
+                $result[] = "Le dossier est créé avec succès.";
                 return $result;
             } else {
                 $result[] = false;
-                $result[] = "Error creating folder";
+                $result[] = "Une erreur est survenu durant la création du dossiers.";
                 return $result;
             }
         }
@@ -41,21 +41,21 @@ class Filesystem {
      * @param string $path Le chemin absolu ou relatif du fichier à créer
      * @return array Un tableau contenant un booléen et un message de confirmation ou d'erreur
      */
-    public static function CreateFile(string $path = "./file.txt"): array {
+    public static function createFile(string $path = "./file.txt"): array {
         $result = array();
 
         if (file_exists($path)) { // Vérifie si le fichier existe déjà
             $result[] = false;
-            $result[] = "File already exists";
+            $result[] = "Le fichier existe déjà.";
             return $result;
         } else {
             if (touch($path)) { // Crée le fichier avec le contenu vide
                 $result[] = true;
-                $result[] = "File created successfully";
+                $result[] = "Le fichier est créé avec succès.";
                 return $result;
             } else {
                 $result[] = false;
-                $result[] = "Error creating file";
+                $result[] = "Une erreur est survenu durant la création du fichier.";
                 return $result;
             }
         }
@@ -70,12 +70,12 @@ class Filesystem {
      * @param string $path Le chemin absolu ou relatif du fichier ou du dossier dont on veut les informations
      * @return array Un tableau contenant les informations du fichier ou dossier.
      */
-    public static function Info(string $path = __FILE__): array {
+    public static function info(string $path = __FILE__): array {
         $fullPath = __DIR__ . '/' . $path;
         if (is_file($fullPath) || is_dir($fullPath)) {
             return stat($fullPath);
         } else {
-            return "Invalid file/directory path";
+            return "Le chemin du fichier/dossier est invalide.";
         }
     }
 
@@ -90,7 +90,7 @@ class Filesystem {
      * @param bool $create Si true, le fichier est recréé ou créé s'il n'existe pas.
      * @return array Un tableau contenant les informations du fichier ou dossier.
      */
-    public static function Write(string $path = "./file.txt", string $content = '', bool $create = true): array
+    public static function write(string $path = "./file.txt", string $content = '', bool $create = true): array
     {
         $result = array();
 
@@ -134,7 +134,7 @@ class Filesystem {
      * @param string $path Le chemin absolu ou relatif vers le fichier à supprimer.
      * @return array Un tableau contenant un booléen et un message de confirmation ou d'erreur.
      */
-    public static function DeleteFile(string $path = "./file.txt"): array {
+    public static function deleteFile(string $path = "./file.txt"): array {
         $result = array();
      
         if (file_exists($path)) {
@@ -166,7 +166,7 @@ class Filesystem {
      * @param bool $recursive 
      * @return array Un tableau contenant un booléen et un message de confirmation ou d'erreur.
      */
-    public static function DeleteFolder(string $path = "./Folder", bool $recursive = false) {
+    public static function deleteFolder(string $path = "./Folder", bool $recursive = false) {
         $result = array();
 
         if (is_dir($path)) {
